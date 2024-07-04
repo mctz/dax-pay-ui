@@ -32,6 +32,7 @@
   import wechat from '/@/assets/payment/wechat.svg'
   import unionPay from '/@/assets/payment/unionPay.svg'
   import wallet from '/@/assets/payment/wallet.svg'
+  import vmq from '/@/assets/payment/vmq.png'
   import { payChannelEnum } from '/@/enums/payment/payChannelEnum'
 
   let confirmLoading = $ref(false)
@@ -70,6 +71,8 @@
    */
   function getIcon(type: string) {
     switch (type) {
+      case payChannelEnum.VMQ:
+        return vmq
       case payChannelEnum.ALI:
         return alipay
       case payChannelEnum.WECHAT:

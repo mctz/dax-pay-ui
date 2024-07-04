@@ -14,6 +14,15 @@
                 style="margin-bottom: 20px; padding: 15px"
               />
               <div class="paydemo-type-content">
+                <div class="paydemo-type-name">扫码支付（免签）</div>
+                <div class="paydemo-type-body">
+                  <div v-for="item in VmqPayList" :key="item.payInfo.method" @click="handleActive(item.payInfo)">
+                    <div :class="item.payInfo === currentActive ? 'colorChange' : 'paydemoType'">
+                      <img :src="item.img" class="paydemo-type-img" />
+                      <span class="color-change">{{ item.title }}</span>
+                    </div>
+                  </div>
+                </div>
                 <div class="paydemo-type-name">微信支付</div>
                 <div class="paydemo-type-body">
                   <div v-for="item in WxPayList" :key="item.payInfo.method" @click="handleActive(item.payInfo)">
@@ -176,6 +185,18 @@
     channel: null,
     method: null,
   })
+  let VmqPayList = $ref([
+    {
+      img: new URL('./imgs/wechat/wx_native.svg', import.meta.url),
+      title: '微信',
+      payInfo: { channel: payChannelEnum.VMQ, method: payMethodEnum.WX },
+    },
+    {
+      img: new URL('./imgs/ali/ali_qr.svg', import.meta.url),
+      title: '支付宝',
+      payInfo: { channel: payChannelEnum.VMQ, method: payMethodEnum.ALI },
+    },
+  ])
   let AliPayList = $ref([
     {
       img: new URL('./imgs/ali/ali_qr.svg', import.meta.url).href,

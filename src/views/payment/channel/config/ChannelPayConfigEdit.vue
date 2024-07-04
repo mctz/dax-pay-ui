@@ -1,4 +1,5 @@
 <template>
+  <vmq-config-edit ref="vmq" @ok="ok" />
   <alipay-config-edit ref="alipay" @ok="ok" />
   <wechat-pay-config-edit ref="wechat" @ok="ok" />
   <union-pay-config-edit ref="union" @ok="ok" />
@@ -9,6 +10,7 @@
   import { useMessage } from '/@/hooks/web/useMessage'
   import { payChannelEnum } from '/@/enums/payment/payChannelEnum'
   import { PayChannelConfig } from '/@/views/payment/system/channel/ChannelConfig.api'
+  import VmqConfigEdit from '/@/views/payment/channel/vmq/config/VmqPayConfigEdit.vue'
   import AlipayConfigEdit from '/@/views/payment/channel/alipay/config/AlipayConfigEdit.vue'
   import WechatPayConfigEdit from '/@/views/payment/channel/wechat/config/WechatPayConfigEdit.vue'
   import WalletConfigEdit from '/@/views/payment/channel/wallet/config/WalletConfigEdit.vue'
@@ -16,6 +18,7 @@
 
   const { createMessage } = useMessage()
 
+  let vmq = $ref<any>()
   let alipay = $ref<any>()
   let wechat = $ref<any>()
   let union = $ref<any>()
@@ -27,6 +30,10 @@
    */
   function show(record: PayChannelConfig) {
     switch (record.code) {
+      case payChannelEnum.VMQ: {
+        vmq.init(record)
+        break
+      }
       case payChannelEnum.ALI: {
         alipay.init(record)
         break

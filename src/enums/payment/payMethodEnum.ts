@@ -9,4 +9,6 @@ export enum payMethodEnum {
   QRCODE = 'qrcode',
   BARCODE = 'barcode',
   JSAPI = 'jsapi',
+  WX = 'wechat',
+  ALI = 'alipay',
 }
