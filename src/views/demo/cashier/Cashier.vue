@@ -7,19 +7,13 @@
         <a-spin :spinning="loading">
           <div class="content" style="padding-top: 20px">
             <div style="width: 100%">
-              <a-alert
-                message="本收银台是基于DaxPay开源支付网关搭建的演示模块，支付后可以通过管理端进行退款。"
-                type="warning"
-                show-icon
-                style="margin-bottom: 20px; padding: 15px"
-              />
               <div class="paydemo-type-content">
-                <div class="paydemo-type-name">扫码支付（免签）</div>
+                <div class="paydemo-type-name">免签支付</div>
                 <div class="paydemo-type-body">
                   <div v-for="item in VmqPayList" :key="item.payInfo.method" @click="handleActive(item.payInfo)">
                     <div :class="item.payInfo === currentActive ? 'colorChange' : 'paydemoType'">
                       <img :src="item.img" class="paydemo-type-img" />
-                      <span class="color-change">{{ item.title }}</span>
+                      <label class="color-change">{{ item.title }}</label>
                     </div>
                   </div>
                 </div>
@@ -94,7 +88,7 @@
                   <div class="paydemo-form-item">
                     <label>业务单号：</label>
                     <span>
-                      <a-input v-model:value="bizOrderNo" />
+                      <a-input disabled v-model:value="bizOrderNo" />
                     </span>
                     <a-button type="primary" @click="genBizOrderNo">生成</a-button>
                   </div>
@@ -274,11 +268,10 @@
   // 结算台下部分内容
   let payMoneyList = [
     // 支付金额列表
-    { label: '0.01', value: 0.01 },
-    { label: '0.02', value: 0.02 },
-    { label: '0.03', value: 0.03 },
     { label: '0.1', value: 0.1 },
-    { label: '1.00', value: 1.0 },
+    { label: '1.0', value: 1.0 },
+    { label: '10.0', value: 10.0 },
+    { label: '100', value: 100 },
     { label: '自定义', value: null },
   ]
   let payMoneyValue = $ref(0.01)
@@ -434,10 +427,10 @@
     // pc支付(微信/支付宝)
     else if ([payMethodEnum.WAP, payMethodEnum.WEB].includes(method)) {
       window.open(data.payBody)
-    } else if (channel === payChannelEnum.ALI) {
+    } else if (channel === payChannelEnum.ALI || method === payMethodEnum.ALI) {
       cashierQrCode.init(data.payBody, '请使用支付宝"扫一扫"进行支付')
       resume()
-    } else if (channel === payChannelEnum.WECHAT) {
+    } else if (channel === payChannelEnum.WECHAT || method === payMethodEnum.WX) {
       cashierQrCode.init(data.payBody, '请使用微信"扫一扫"进行支付')
       resume()
     } else {

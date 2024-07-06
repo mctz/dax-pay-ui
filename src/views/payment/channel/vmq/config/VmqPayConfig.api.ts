@@ -47,6 +47,7 @@ export interface VmqPayConfig extends BaseEntity {
   appKey?: string
   // 是否启用
   enable: boolean
+  email?: string
   // 支付限额
   limitAmount?: number
   // 商户账号ID

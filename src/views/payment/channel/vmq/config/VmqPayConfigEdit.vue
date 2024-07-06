@@ -22,6 +22,9 @@
         <a-form-item label="是否启用" name="enable">
           <a-switch checked-children="启用" un-checked-children="停用" v-model:checked="form.enable" />
         </a-form-item>
+        <a-form-item label="通知邮箱" name="email">
+          <a-input v-model:value="form.email" placeholder="请输入通知邮箱" />
+        </a-form-item>
         <a-form-item name="limitAmount">
           <template #label>
             <basic-title helpMessage="每次发起支付的金额不能超过该值，如果同时配置了全局支付限额，则以额度低的为准">
@@ -104,6 +107,7 @@
     appId: '',
     appKey: '',
     enable: false,
+    email: '',
     limitAmount: 20000,
     notifyUrl: '',
     returnUrl: '',

@@ -82,8 +82,8 @@
 
   const form = reactive({
     client: '',
-    account: '',
-    password: '',
+    account: 'guest',
+    password: 'guest#123',
     loginType: 'password',
     captchaKey: '',
     captcha: '',
