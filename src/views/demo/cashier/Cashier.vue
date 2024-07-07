@@ -115,7 +115,7 @@
                       v-if="payMoneyShow"
                       style="width: 120px !important"
                       :max="100"
-                      :min="0.01"
+                      :min="0.1"
                       :precision="2"
                       v-model:value="totalMoney"
                     />
@@ -274,8 +274,8 @@
     { label: '100', value: 100 },
     { label: '自定义', value: null },
   ]
-  let payMoneyValue = $ref(0.01)
-  let totalMoney: null | number = $ref(0.01)
+  let payMoneyValue = $ref(0.1)
+  let totalMoney: null | number = $ref(0.1)
   let payMoneyShow = false
 
   // 检查支付状态
@@ -482,6 +482,7 @@
   function handleCancel() {
     cashierQrCode.handleClose()
     cashierBarCode.handleClose()
+    cashierQrCode.closeQrPay(bizOrderNo)
     genBizOrderNo()
     pause()
   }

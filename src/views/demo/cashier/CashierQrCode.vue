@@ -12,6 +12,8 @@
 <script lang="ts" setup>
   import QrCode from '/@/components/Qrcode/src/Qrcode.vue'
   import { $ref } from 'vue/macros'
+  import { defHttp } from "/@/utils/http/axios";
+  import { Result } from "/#/axios";
 
   let visible = $ref(false)
   let bottomTitle = $ref('')
@@ -30,7 +32,15 @@
   function handleClose() {
     visible = false
   }
-  defineExpose({ init, handleClose })
+
+  function closeQrPay(bizOrderNoeNo) {
+    defHttp.post<Result<void>>({
+      url: '/order/pay/closeQr',
+      params: { bizOrderNoeNo },
+    })
+  }
+
+  defineExpose({ init, handleClose, closeQrPay })
 </script>
 
 <style scoped></style>
